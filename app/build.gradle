@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply from: "$rootDir/gradle/ktlint.gradle"
 
 android {
     compileSdkVersion 29
@@ -21,10 +22,6 @@ android {
     }
 }
 
-configurations {
-    ktlint
-}
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -33,24 +30,4 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-
-    ktlint "com.pinterest:ktlint:0.34.2"
-    ktlint project(path: ':custom-ktlint-rules', configuration: 'default')
-}
-
-task ktlint(type: JavaExec, group: "verification") {
-    description = "Check Kotlin code style."
-    classpath = configurations.ktlint
-    main = "com.pinterest.ktlint.Main"
-    args "src/**/*.kt", "-R", "/Users/rishi/Development/Android/CustomKtlintRules/custom-ktlint-rules/build/jars/custom_ktlint_rules.jar"
-}
-// Ensure rules are always up-to-date.
-ktlint.dependsOn(':custom-ktlint-rules:createJar')
-check.dependsOn ktlint
-
-task ktlintFormat(type: JavaExec, group: "formatting") {
-    description = "Fix Kotlin code style deviations."
-    classpath = configurations.ktlint
-    main = "com.pinterest.ktlint.Main"
-    args "-F", "src/**/*.kt"
 }
