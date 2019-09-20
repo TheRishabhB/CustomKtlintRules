@@ -1,0 +1,57 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    // KtLint
+    implementation "com.github.pinterest.ktlint:ktlint-core:$ktlint_version"
+
+    testImplementation "com.github.pinterest.ktlint:ktlint-core:$ktlint_version"
+    testImplementation "com.github.pinterest.ktlint:ktlint-test:$ktlint_version"
+
+    annotationProcessor "com.github.pinterest.ktlint:ktlint-core:$ktlint_version"
+    annotationProcessor "com.github.pinterest.ktlint:ktlint-test:$ktlint_version"
+}
+
+task deleteJar(type: Delete, group: "build") {
+    delete 'build/intermediates/full_jar/release/createFullJarRelease/full.jar'
+    delete 'build/intermediates/full_jar/release/createFullJarRelease/custom_ktlint_rules.jar'
+}
+
+task createJar(type: Copy, group: "build") {
+    from('build/intermediates/full_jar/release/createFullJarRelease/')
+    into('build/jars/')
+    include('full.jar')
+    rename('full.jar', 'custom_ktlint_rules.jar')
+}
+createJar.dependsOn(deleteJar, 'createFullJarRelease')

@@ -1,0 +1,2 @@
+include ':app', ':custom-ktlint-rules'
+rootProject.name='CustomKtlintRules'
