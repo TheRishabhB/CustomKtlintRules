@@ -23,7 +23,7 @@ class NoForceUnwrapRule : Rule("no-force-unwraps") {
             emit(
                 node.startOffset,
                 "No Force Unwrapping (${KtTokens.EXCLEXCL.value}) allowed. " +
-                        "Please handle null case. " +
+                        "Please handle null case " +
                         "EG: With Elvis Operator (${KtTokens.ELVIS.value})",
                 false
             )
