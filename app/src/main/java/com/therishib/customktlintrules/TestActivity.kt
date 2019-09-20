@@ -12,6 +12,14 @@ class TestActivity : AppCompatActivity() {
         // Should not fail here!!
         // Should not fail here !!
 
+        /*
+         * Should not fail here!!
+         */
+
+        /*
+         * Should not fail here !!
+         */
+
         /**
          * Should not fail here!!
          */

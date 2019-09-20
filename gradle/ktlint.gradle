@@ -13,7 +13,7 @@ task ktlint(type: JavaExec, group: "verification") {
     main = "com.pinterest.ktlint.Main"
     args "src/**/*.kt", "-R", "$rootDir/custom-ktlint-rules/build/jars/custom_ktlint_rules.jar"
 }
-// Ensure rules are always up-to-date.
+// Ensure custom rules are always up-to-date.
 ktlint.dependsOn(':custom-ktlint-rules:createJar')
 check.dependsOn ktlint
 

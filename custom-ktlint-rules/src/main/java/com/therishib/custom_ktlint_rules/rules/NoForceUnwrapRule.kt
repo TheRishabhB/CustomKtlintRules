@@ -2,6 +2,7 @@ package com.therishib.custom_ktlint_rules.rules
 
 import com.pinterest.ktlint.core.Rule
 import com.pinterest.ktlint.core.ast.isPartOfString
+import com.therishib.custom_ktlint_rules.extensions.isComment
 import com.therishib.custom_ktlint_rules.extensions.isKtDoc
 import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
@@ -16,7 +17,8 @@ class NoForceUnwrapRule : Rule("no-force-unwraps") {
         if (node is LeafPsiElement &&
             !node.isKtDoc() &&
             !node.isPartOfString() &&
-            node.textMatches(KtTokens.EXCLEXCL.value)
+            !node.isComment() &&
+            node.textMatches(KtTokens.EXCLEXCL.value) // node == "!!"
         ) {
             emit(
                 node.startOffset,
