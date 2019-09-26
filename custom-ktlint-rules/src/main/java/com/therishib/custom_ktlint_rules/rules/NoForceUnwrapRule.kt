@@ -8,7 +8,9 @@ import org.jetbrains.kotlin.com.intellij.lang.ASTNode
 import org.jetbrains.kotlin.com.intellij.psi.impl.source.tree.LeafPsiElement
 import org.jetbrains.kotlin.lexer.KtTokens
 
-class NoForceUnwrapRule : Rule("no-force-unwraps") {
+internal const val NO_FORCE_UNWRAP_RULE_NAME = "no-force-unwraps"
+
+class NoForceUnwrapRule : Rule(NO_FORCE_UNWRAP_RULE_NAME) {
     override fun visit(
         node: ASTNode,
         autoCorrect: Boolean,
