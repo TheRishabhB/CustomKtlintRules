@@ -11,11 +11,11 @@ class TestActivity : AppCompatActivity() {
         setContentView(R.layout.activity_test)
 
         val kk: Int? = null
-        val y: Int = kk!! // ktlint-disable custom:no-force-unwraps
+        val ok: Int = kk!! // ktlint-disable custom:no-force-unwraps
 
         /* ktlint-disable custom:no-force-unwraps */
         val lol: Int? = null
-        val y: Int = lol!!
+        val why: Int = lol!!
         /* ktlint-enable custom:no-force-unwraps */
 
         val x: Int? = null
