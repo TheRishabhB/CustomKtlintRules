@@ -10,6 +10,9 @@ import org.jetbrains.kotlin.lexer.KtTokens
 
 internal const val NO_FORCE_UNWRAP_RULE_NAME = "no-force-unwraps"
 
+/**
+ * This will check if user has any force-unwraps (otherwise known as "bang-bang" operators) in code.
+ */
 class NoForceUnwrapRule : Rule(NO_FORCE_UNWRAP_RULE_NAME) {
     override fun visit(
         node: ASTNode,
